@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\fokypoky\RiderProjects\StoreModuleClient\StoreModuleClient\obj\Debug\net7.0-windows\
+C:\Users\fokypoky\RiderProjects\StoreModuleClient\StoreModuleClient\obj\Release\net7.0-windows\
 StoreModuleClient
 none
 false
-TRACE;DEBUG;NET;NET7_0;NETCOREAPP
+TRACE;RELEASE;NET;NET7_0;NETCOREAPP
 C:\Users\fokypoky\RiderProjects\StoreModuleClient\StoreModuleClient\App.xaml
 11-292711155
 

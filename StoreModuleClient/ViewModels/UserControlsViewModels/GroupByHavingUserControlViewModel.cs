@@ -9,7 +9,7 @@ namespace StoreModuleClient.ViewModels.UserControlsViewModels;
 public class GroupByHavingUserControlViewModel : ViewModel
 {
     private List<EmployeeProductCountView> _employeeProducts;
-
+//
     public List<EmployeeProductCountView> EmployeeProducts
     {
         get => _employeeProducts;
