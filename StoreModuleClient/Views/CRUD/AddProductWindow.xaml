@@ -1,0 +1,44 @@
+﻿<Window x:Class="StoreModuleClient.Views.CRUD.AddProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:StoreModuleClient.Views.CRUD"
+        xmlns:vmodel="clr-namespace:StoreModuleClient.ViewModels.CRUD"
+        mc:Ignorable="d"
+        Title="AddProductWindow" Height="450" Width="300"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <vmodel:AddProductWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Width="250"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Product title"/>
+            <TextBox Text="{Binding ProductTitle,
+                            UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <TextBlock Text="Serial number"/>
+            <TextBox Text="{Binding SerialNumber,
+                            UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <TextBlock Text="Cost"/>
+            <TextBox Text="{Binding Cost,
+                            UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <TextBlock Text="Manufacturer"/>
+            <ComboBox ItemsSource="{Binding Manufacturers}"
+                      SelectedItem="{Binding SelectedManufacturer}"
+                      DisplayMemberPath="Title"/>
+            
+            <Button Content="ADD" Height="30" Margin="0,6,0,0"
+                    Command="{Binding AddProductButtonClick}"/>
+        </StackPanel>
+    </Grid>
+</Window>

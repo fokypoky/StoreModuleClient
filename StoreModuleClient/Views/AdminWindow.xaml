@@ -1,0 +1,272 @@
+﻿<Window x:Class="StoreModuleClient.Views.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:StoreModuleClient.Views"
+        xmlns:vmodel="clr-namespace:StoreModuleClient.ViewModels"
+        mc:Ignorable="d"
+        Title="Admin window" MinHeight="450" MinWidth="800">
+    
+    <Window.DataContext>
+        <vmodel:AdminWindowViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <TabControl>
+            <TabItem Header="Manufacturers">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ListView ItemsSource="{Binding Manufacturers}"
+                              SelectedItem="{Binding SelectedManufacturer}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Title" 
+                                                DisplayMemberBinding="{Binding Title}"/>
+                                <GridViewColumn Header="Country"
+                                                DisplayMemberBinding="{Binding Country}"/>
+                                <GridViewColumn Header="Products count"
+                                                DisplayMemberBinding="{Binding ProductsCount}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Title:" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                            <TextBlock Text="{Binding SelectedManufacturer.Title}"
+                                       VerticalAlignment="Center" Margin="5,0,5,0"/>
+                            <TextBlock Text="New title:" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                            <TextBox VerticalAlignment="Center" MinWidth="100" 
+                                     Text="{Binding NewManufacturerTitle,
+                                     UpdateSourceTrigger=PropertyChanged}"
+                                     Margin="5,0,5,0"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="6"
+                                Content="Add manufacturer"
+                                Command="{Binding AddManufacturerButtonClick}"/>
+                        <Button Grid.Column="1" Margin="6"
+                                Content="Remove manufacturer"
+                                Command="{Binding RemoveManufacturerButtonClick}"/>
+                        <Button Grid.Column="2" Margin="6"
+                                Content="Update manufacturer"
+                                Command="{Binding UpdateManufacturerButtonClick}"/>
+                        <Button Grid.Column="3" Margin="6"
+                                Content="Update list"
+                                Command="{Binding UpdateManufacturersListButtonClick}"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Products">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ListView ItemsSource="{Binding Products}"
+                              SelectedItem="{Binding SelectedProduct}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Title" 
+                                                DisplayMemberBinding="{Binding ProductTitle}"/>
+                                <GridViewColumn Header="Serial number"
+                                                DisplayMemberBinding="{Binding SerialNumber}"/>
+                                <GridViewColumn Header="Cost"
+                                                DisplayMemberBinding="{Binding Cost}"/>
+                                <GridViewColumn Header="Manufacturer"
+                                                DisplayMemberBinding="{Binding Manufacturer.Title}"/>
+                                <GridViewColumn Header="Update date"
+                                                DisplayMemberBinding="{Binding UpdateDate}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="Selected product serial:" Margin="5,0,5,0"/>
+                        <TextBlock Text="{Binding SelectedProduct.SerialNumber}"
+                                   Margin="5,0,5,0"/>
+                        <TextBlock Text="Old cost:"
+                                   Margin="5,0,5,0"/>
+                        <TextBlock Text="{Binding SelectedProduct.Cost}"
+                                   Margin="5,0,5,0"/>
+                        <TextBlock Text="New cost:"
+                                   Margin="5,0,5,0"/>
+                        <TextBox Text="{Binding NewProductCost,
+                                        UpdateSourceTrigger=PropertyChanged}"
+                                        MinWidth="100"/>
+                    </StackPanel>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                                Content="Add new product"
+                                Margin="6"
+                                Command="{Binding AddProductButtonClick}"/>
+                        <Button Grid.Column="1" Margin="6" 
+                                Content="Remove product"
+                                Command="{Binding RemoveProductButtonClick}"/>
+                        <Button Grid.Column="2" Margin="6"
+                                Content="Update product cost"
+                                Command="{Binding UpdateProductCostButtonClick}"/>
+                        <Button Grid.Column="3" Margin="6"
+                                Content="Update list"
+                                Command="{Binding UpdateProductListButtonClick}"/>
+                        
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Store">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ListView ItemsSource="{Binding Stores}"
+                              SelectedItem="{Binding SelectedStore}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Product"
+                                                DisplayMemberBinding="{Binding Product.ProductTitle}"/>
+                                <GridViewColumn Header="Amount"
+                                                DisplayMemberBinding="{Binding Amount}"/>
+                                <GridViewColumn Header="Employee"
+                                                DisplayMemberBinding="{Binding Employee.EmployeeName}"/>
+                                <GridViewColumn Header="Total cost"
+                                                DisplayMemberBinding="{Binding AllCost}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Text="Selected product:" Margin="5,0,5,0"/>
+                        <TextBlock Text="{Binding SelectedStore.Product.ProductTitle}"
+                                   Margin="5,0,5,0"/>
+                        <TextBlock Text="Selected product amount:"
+                                   Margin="5,0,5,0"/>
+                        <TextBlock Text="{Binding SelectedStore.Amount}"
+                                   Margin="5,0,5,0"/>
+                        <TextBlock Text="New amount:"
+                                   Margin="5,0,5,0"/>
+                        <TextBox Text="{Binding NewStoreAmount}"
+                                 MinWidth="100"
+                                 Margin="5,0,5,0"/>
+                    </StackPanel>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Add to store" Margin="6"
+                                Command="{Binding AddProductToStoreButtonClick}"/>
+                        <Button Grid.Column="1" Content="Remove from store" Margin="6"
+                                Command="{Binding RemoveProductFromStoreButtonClick}"/>
+                        <Button Grid.Column="2" Content="Update store amount" Margin="6"
+                                Command="{Binding UpdateProductAmountInStoreButtonClick}"/>
+                        <Button Grid.Column="3" Content="Update list" Margin="6"
+                                Command="{Binding UpdateStoreListButtonClick}"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Employees">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ListView ItemsSource="{Binding Employees}"
+                              SelectedItem="{Binding SelectedEmployee}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name"
+                                                DisplayMemberBinding="{Binding EmployeeName}"/>
+                                <GridViewColumn Header="Passport"
+                                                DisplayMemberBinding="{Binding Passport}"/>
+                                <GridViewColumn Header="Birthday"
+                                                DisplayMemberBinding="{Binding Birthday}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Name:"/>
+                            <TextBlock Text="{Binding SelectedEmployee.EmployeeName}"
+                                       Margin="5,0,5,0"/>
+                            <TextBlock Text="Country:"
+                                       Margin="5,0,5,0"/>
+                            <TextBlock Text="{Binding SelectedEmployee.Passport}"
+                                       Margin="5,0,5,0"/>
+                            <TextBlock Text="Birthday:"
+                                       Margin="5,0,5,0"/>
+                            <TextBlock Text="{Binding SelectedEmployee.Birthday}"
+                                       Margin="5,0,5,0"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="1"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="New name:"
+                                       Margin="5,0,5,0"/>
+                            <TextBox Text="{Binding NewEmployeeName,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                                     MinWidth="100"
+                                     Margin="5,0,5,0"/>
+                            <TextBlock Text="New passport:"
+                                       Margin="5,0,5,0"/>
+                            <TextBox Text="{Binding NewEmployeePassport,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                                     MinWidth="100"
+                                     Margin="5,0,5,0"/>
+                            
+                            <TextBlock Text="New birthday:"
+                                       Margin="5,0,5,0"/>
+                            <DatePicker SelectedDate="{Binding NewEmployeeBirthday}"
+                                        Margin="5,0,5,0"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Add employee" Margin="6"
+                                Command="{Binding AddEmployeeButtonClick}"/>
+                        <Button Grid.Column="1" Content="Remove employee" Margin="6"
+                                Command="{Binding RemoveEmployeeButtonClick}"/>
+                        <Button Grid.Column="2" Content="Update employee" Margin="6"
+                                Command="{Binding UpdateEmployeeButtonClick}"/>
+                        <Button Grid.Column="3" Content="Update list" Margin="6"
+                                Command="{Binding UpdateEmployeesListButtonClick}"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
