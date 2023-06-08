@@ -14,16 +14,21 @@ public class Repository<T> : IRepository<T> where T : class
 
     public virtual T GetById(int id) => _context.Set<T>().Find(id);
 
-    public virtual async void Add(T enrity)
+    public virtual void Add(T enrity)
     {
         _context.Set<T>().Add(enrity);
-        await _context.SaveChangesAsync();
+        _context.SaveChangesAsync();
     }
 
-    public virtual async void Remove(T entity)
+    public virtual void Remove(T entity)
     {
         _context.Set<T>().Remove(entity);
-        await _context.SaveChangesAsync();
+        _context.SaveChangesAsync();
     }
-    
+
+    public virtual void Update(T entity)
+    {
+        _context.Set<T>().Update(entity);
+        _context.SaveChangesAsync();
+    }
 }
